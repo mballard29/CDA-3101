@@ -1,0 +1,31 @@
+add regA, regB, destR
+    destR = regA + regB
+    PC += 1
+
+nand regA, regB, destR
+    destR = ~(regA & regB)
+    PC += 1
+
+lw regA, regB, offset
+    regB = M[regA + offset]
+    PC += 1
+
+sw regA, regB, offset
+    M[regA + offset] = regB
+    PC += 1
+
+beq regA, regB, offset
+    if (regA == regB)
+        PC = PC + 1 + offset
+    else PC += 1
+
+jalr regA, regB
+    regB = PC + 1
+    PC = regA
+
+halt
+    PC += 1
+    // let simulator know that the machine halted
+
+noop
+    PC += 1
